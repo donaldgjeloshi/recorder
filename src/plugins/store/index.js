@@ -26,7 +26,11 @@ const store = new Vuex.Store({
         timestamp: 0
       },
       keyboard: {
-        input: "",
+        key: "",
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        altKey: false,
         timestamp: 0
       }
     }
@@ -43,6 +47,18 @@ const store = new Vuex.Store({
       state.recorder.timestamp = new Date();
       state.recorder.scene = scene;
       state.recorder.track = [];
+      state.recorder.mouse.relX = 0;
+      state.recorder.mouse.relY = 0;
+      state.recorder.mouse.x = 0;
+      state.recorder.mouse.y = 0;
+      state.recorder.mouse.buttons = 0;
+      state.recorder.mouse.timestamp = 0;
+      state.recorder.keyboard.key = "";
+      state.recorder.keyboard.ctrlKey = false;
+      state.recorder.keyboard.metaKey = false;
+      state.recorder.keyboard.shiftKey = false;
+      state.recorder.keyboard.altKey = false;
+      state.recorder.keyboard.timestamp = 0;
     },
     stop(state) {
       state.recorder.state = "deactive";
@@ -69,7 +85,11 @@ const store = new Vuex.Store({
           timestamp: state.recorder.mouse.timestamp
         },
         keyboard: {
-          input: state.recorder.keyboard.input,
+          key: state.recorder.keyboard.key,
+          ctrlKey: state.recorder.keyboard.ctrlKey,
+          metaKey: state.recorder.keyboard.metaKey,
+          shiftKey: state.recorder.keyboard.shiftKey,
+          altKey: state.recorder.keyboard.altKey,
           timestamp: state.recorder.keyboard.timestamp
         }
       };
@@ -81,6 +101,17 @@ const store = new Vuex.Store({
       state.recorder.mouse.x = x;
       state.recorder.mouse.y = y;
       state.recorder.mouse.timestamp = timestamp;
+    },
+    updateKeyboard(
+      state,
+      { key, ctrlKey, metaKey, shiftKey, altKey, timestamp }
+    ) {
+      state.recorder.keyboard.key = key;
+      state.recorder.keyboard.ctrlKey = ctrlKey;
+      state.recorder.keyboard.metaKey = metaKey;
+      state.recorder.keyboard.shiftKey = shiftKey;
+      state.recorder.keyboard.altKey = altKey;
+      state.recorder.keyboard.timestamp = timestamp;
     },
     delete(state, id) {
       const idx = state.records.findIndex(e => e.id === id);

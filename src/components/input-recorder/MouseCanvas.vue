@@ -34,7 +34,10 @@ export default {
   methods: {
     onMouseMove(e) {
       if (this.recorder.state === "active") {
-        const { width, height } = this.$refs.mouseCanvas.getBoundingClientRect();
+        const {
+          width,
+          height
+        } = this.$refs.mouseCanvas.getBoundingClientRect();
         const { offsetX, offsetY, buttons } = e;
         this.$store.commit("updateMouse", {
           relX: offsetX / width,
