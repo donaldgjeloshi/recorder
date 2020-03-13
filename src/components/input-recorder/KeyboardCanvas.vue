@@ -28,8 +28,6 @@ export default {
         this.$store.commit("record");
       }
     });
-    /* eslint-disable no-console */
-    console.log(body);
   },
   computed: {
     ...mapState(["recorder"]),

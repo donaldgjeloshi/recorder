@@ -44,7 +44,7 @@ export default {
           relY: offsetY / height,
           x: offsetX,
           y: offsetY,
-          timestamp: new Date(),
+          timestamp: e.timeStamp,
           buttons
         });
         this.$store.commit("record");
