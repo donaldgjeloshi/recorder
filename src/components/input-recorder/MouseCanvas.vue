@@ -59,11 +59,14 @@ export default {
       }
     },
     updateTimestamp() {
-      const diff = Math.abs(new Date() - this.recorder.timestamp);
+      const diff = Math.abs(Date.now() - this.recorder.timestamp);
+      //const rightDate = diff.toISOString();
       this.miliseconds = pad3(diff % 1000);
       this.seconds = pad2(diff / 1000);
       this.minutes = pad2(diff / (1000 * 60));
       this.hours = pad2(diff / (1000 * 60 * 60));
+      //console.log(Date.now());
+      console.log(this.recorder.timestamp);
     }
   },
   computed: {

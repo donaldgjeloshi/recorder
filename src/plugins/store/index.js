@@ -123,11 +123,7 @@ const store = new Vuex.Store({
       state.recorder.input.label = input.label;
     }
   },
-  getters: {
-    getTimestamp: state => {
-      return state.recorder.timestamp;
-    }
-  },
+  getters: {},
   actions: {},
   modules: {}
 });

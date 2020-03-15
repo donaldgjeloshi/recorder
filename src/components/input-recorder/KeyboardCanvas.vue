@@ -23,7 +23,7 @@ export default {
           metaKey: e.metaKey,
           shiftKey: e.shiftKey,
           altKey: e.altKey,
-          timestamp: new Date()
+          timestamp: Date.now()
         });
         this.$store.commit("record");
       }

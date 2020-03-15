@@ -2,7 +2,7 @@
   <div id="replayer">
     <Info />
     <MouseCanvas v-bind:time="timer" />
-    <KeyboardCanvas />
+    <KeyboardCanvas v-bind:time="timer" />
     <button v-on:click="onStart">Start</button>
     <button v-on:click="onStop">Stop</button>
   </div>
