@@ -58,7 +58,9 @@ export default {
       const record = this.records.find(recording => {
         return recording.id == this.$route.params.id;
       });
-      return record.track;
+      return record.track.filter(entry => {
+        return !entry.keyboard;
+      });
     },
     filteredTrack() {
       const first = this.track[0];

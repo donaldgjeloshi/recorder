@@ -1,16 +1,24 @@
 <template>
   <div id="keyboard-canvas">
-    <svg viewBox="0 0 400 30">
-      <text
-        x="200"
-        y="22"
-        text-anchor="middle"
-        v-for="(entry, idx) of filteredTrack"
-        v-bind:key="idx"
-      >
-        {{ entry.keyboard ? entry.keyboard.key : "" }}
-      </text>
-    </svg>
+    <div>
+      <!-- <div id="current">
+        <kbd v-if="letter">
+          {{ letter.keyboard.key }}
+        </kbd>
+      </div> -->
+      <div id="current">
+        <kbd v-if="lettersBefore(1)">
+          {{ lettersBefore(1).keyboard.key }}
+        </kbd>
+      </div>
+      <div id="previous">
+        <template v-for="({ text }, index) of letters">
+          <kbd v-if="text" :key="index">
+            {{ text.keyboard.key }}
+          </kbd>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,32 +35,79 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  methods: {
+    lettersBefore(idx) {
+      const l = this.filteredTrack.filter(entry => {
+        return entry.keyboard.key !== "";
+      });
+      return l.length >= idx ? l[l.length - idx] : false;
+    }
+  },
   computed: {
     ...mapState(["records"]),
 
     track() {
       const record = this.records.find(recording => {
-        return recording.id == this.$route.params.id;
+        return recording.id === this.$route.params.id;
       });
-      return record.track;
+      return record.track.filter(entry => {
+        return !entry.mouse;
+      });
     },
     filteredTrack() {
       const first = this.track[0];
-      return this.track.filter(entry => {
-        return entry.timestamp <= first.timestamp + this.time;
+      const f = this.track.filter(entry => {
+        return entry.timestamp < first.timestamp + this.time;
       });
-    } /* ,
+      return f;
+    },
     letter() {
-      for (const entry of this.filteredTrack) {
-        return filteredTrack.length > 0 ? entry.keyboard.key : "";
-      }
-    } */
+      return this.filteredTrack.length > 0
+        ? this.filteredTrack[this.filteredTrack.length - 1]
+        : false;
+    },
+
+    letters() {
+      return [
+        { text: this.lettersBefore(1) },
+        { text: this.lettersBefore(2) },
+        { text: this.lettersBefore(3) }
+      ];
+    }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-text
-  font-size 15px
+kbd
+  background-color #ddd
+  padding 0.25rem 0.5rem
+  border 1px solid #aaa
+  border-radius 4px
+  box-shadow 1px 1px 3px 1px #aaa
+  font-size 1.4rem
+div#keyboard-canvas
+  div
+    background-color white
+    height 3.2rem
+    display flex
+    flex-flow column wrap
+    justify-content center
+    div
+      background-color none
+      align-items center
+      height 0
+      display flex
+      padding 0
+      margin 0
+    div#current
+      justify-content center
+      background-color none
+      width 100%
+    div#previous
+      kbd
+        opacity 0.5
+      flex-flow row-reverse nowrap
+      width 40%
+      justify-content space-around
 </style>

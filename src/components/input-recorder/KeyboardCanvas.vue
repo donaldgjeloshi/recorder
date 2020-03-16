@@ -14,18 +14,27 @@ export default {
     const bodies = document.getElementsByTagName("body");
     const body = bodies[0];
     body.addEventListener("keydown", e => {
-      /* eslint-disable no-console */
-      console.log(e.key);
-      if (this.recorder.state === "active") {
+      if (!e.repeat && this.recorder.state === "active") {
         this.$store.commit("updateKeyboard", {
           key: e.key,
           ctrlKey: e.ctrlKey,
           metaKey: e.metaKey,
           shiftKey: e.shiftKey,
           altKey: e.altKey,
-          timestamp: Date.now()
+          timestamp: e.timeStamp
         });
-        this.$store.commit("record");
+      }
+    });
+    body.addEventListener("keyup", e => {
+      if (this.recorder.state === "active") {
+        this.$store.commit("updateKeyboard", {
+          key: "",
+          ctrlKey: false,
+          metaKey: false,
+          shiftKey: false,
+          altKey: false,
+          timestamp: e.timeStamp
+        });
       }
     });
   },

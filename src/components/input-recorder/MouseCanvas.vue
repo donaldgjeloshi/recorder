@@ -47,26 +47,25 @@ export default {
           timestamp: e.timeStamp,
           buttons
         });
-        this.$store.commit("record");
       }
     },
     tick() {
       if (this.recorder.state === "active") {
-        const l = this.recorder.track.length;
-        this.track = this.recorder.track.slice(l - 400, l);
+        const track = this.recorder.track.filter(entry => {
+          return !entry.keyboard;
+        });
+        const l = track.length;
+        this.track = l >= 400 ? track.slice(l - 400, l) : track;
         this.updateTimestamp();
         window.requestAnimationFrame(this.tick);
       }
     },
     updateTimestamp() {
-      const diff = Math.abs(Date.now() - this.recorder.timestamp);
-      //const rightDate = diff.toISOString();
+      const diff = Math.abs(Date.now() - this.recorder.startedOn);
       this.miliseconds = pad3(diff % 1000);
       this.seconds = pad2(diff / 1000);
       this.minutes = pad2(diff / (1000 * 60));
       this.hours = pad2(diff / (1000 * 60 * 60));
-      //console.log(Date.now());
-      console.log(this.recorder.timestamp);
     }
   },
   computed: {

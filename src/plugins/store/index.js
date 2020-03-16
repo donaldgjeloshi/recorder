@@ -74,45 +74,47 @@ const store = new Vuex.Store({
         }
       });
     },
-    record(state) {
-      const entry = {
-        timestamp: Date.now(),
-        mouse: {
-          relX: state.recorder.mouse.relX,
-          relY: state.recorder.mouse.relY,
-          x: state.recorder.mouse.x,
-          y: state.recorder.mouse.y,
-          buttons: state.recorder.mouse.buttons,
-          timestamp: state.recorder.mouse.timestamp
-        },
-        keyboard: {
-          key: state.recorder.keyboard.key,
-          ctrlKey: state.recorder.keyboard.ctrlKey,
-          metaKey: state.recorder.keyboard.metaKey,
-          shiftKey: state.recorder.keyboard.shiftKey,
-          altKey: state.recorder.keyboard.altKey,
-          timestamp: state.recorder.keyboard.timestamp
-        }
-      };
-      state.recorder.track.push(entry);
-    },
     updateMouse(state, { relX, relY, x, y, timestamp }) {
+      state.recorder.timestamp = timestamp;
       state.recorder.mouse.relX = relX;
       state.recorder.mouse.relY = relY;
       state.recorder.mouse.x = x;
       state.recorder.mouse.y = y;
-      state.recorder.mouse.timestamp = timestamp;
+      const entry = {
+        timestamp,
+        mouse: {
+          relX,
+          relY,
+          x,
+          y
+        },
+        keyboard: false
+      };
+      state.recorder.track.push(entry);
     },
     updateKeyboard(
       state,
       { key, ctrlKey, metaKey, shiftKey, altKey, timestamp }
     ) {
+      state.recorder.timestamp = timestamp;
       state.recorder.keyboard.key = key;
       state.recorder.keyboard.ctrlKey = ctrlKey;
       state.recorder.keyboard.metaKey = metaKey;
       state.recorder.keyboard.shiftKey = shiftKey;
       state.recorder.keyboard.altKey = altKey;
       state.recorder.keyboard.timestamp = timestamp;
+      const entry = {
+        timestamp,
+        keyboard: {
+          key,
+          ctrlKey,
+          metaKey,
+          shiftKey,
+          altKey
+        },
+        mouse: false
+      };
+      state.recorder.track.push(entry);
     },
     delete(state, id) {
       const idx = state.records.findIndex(e => e.id === id);
