@@ -3,8 +3,17 @@
     <Info />
     <MouseCanvas v-bind:time="timer" />
     <KeyboardCanvas v-bind:time="timer" />
-    <button v-on:click="onStart">Start</button>
-    <button v-on:click="onStop">Stop</button>
+
+    <div id="main">
+      <button id="start" @click="onStart">
+        <font-awesome-icon icon="play" />
+        Start
+      </button>
+      <button id="stop" @click="onStop">
+        <font-awesome-icon icon="stop" />
+        Stop
+      </button>
+    </div>
   </div>
 </template>
 
@@ -23,6 +32,7 @@ export default {
       animationFrameID: 0
     };
   },
+  computed: {},
   methods: {
     onStart() {
       this.timer = 0;
@@ -49,4 +59,12 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+#icon
+  position relative
+  top 1.4rem
+  right 2rem
+  width 0
+  color white
+  pointer-events none
+</style>

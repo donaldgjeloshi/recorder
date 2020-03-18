@@ -1,16 +1,16 @@
 <template>
   <div id="keyboard-canvas">
     <div>
-      <!-- <div id="current">
+      <div id="current">
         <kbd v-if="letter">
           {{ letter.keyboard.key }}
         </kbd>
-      </div> -->
-      <div id="current">
+      </div>
+      <!-- <div id="current">
         <kbd v-if="lettersBefore(1)">
           {{ lettersBefore(1).keyboard.key }}
         </kbd>
-      </div>
+      </div> -->
       <div id="previous">
         <template v-for="({ text }, index) of letters">
           <kbd v-if="text" :key="index">
