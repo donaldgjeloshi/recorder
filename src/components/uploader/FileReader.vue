@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3">
-    <label class="file-reader" style="color: rgb(104,182,132)">
+    <label class="file-reader" style="color: rgb(104, 182, 132);">
       Upload
       <input type="file" @change="loadJSONFromFile" />
     </label>
@@ -9,17 +9,22 @@
 
 <script>
 export default {
+  name: "FileReader",
+  data() {
+    return {
+      result: ""
+    };
+  },
   methods: {
     loadJSONFromFile(event) {
       const FIRST_FILE = 0;
       const file = event.target.files[FIRST_FILE];
-      //constructor
       const reader = new FileReader();
 
       reader.onload = e => {
+        this.result = JSON.parse(e.target.result);
         this.$emit("load", e.target.result);
-        const textFile = e.target.result;
-        console.log(textFile);
+        console.log(this.result);
       };
       reader.readAsText(file);
     }

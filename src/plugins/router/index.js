@@ -13,22 +13,26 @@ const routes = [
   {
     path: "/record/:scene/new",
     name: "Recorder",
-    component: () => import(/* webpackChunkName: "recorder" */ "@/views/Recorder.vue")
+    component: () =>
+      import(/* webpackChunkName: "recorder" */ "@/views/Recorder.vue")
   },
   {
     path: "/record",
     name: "Scenes",
-    component: () => import(/* webpackChunkName: "scenes" */ "@/views/Scenes.vue")
+    component: () =>
+      import(/* webpackChunkName: "scenes" */ "@/views/Scenes.vue")
   },
   {
     path: "/replay/:id",
     name: "Replayer",
-    component: () => import(/* webpackChunkName: "replayer" */ "@/views/Replayer.vue")
+    component: () =>
+      import(/* webpackChunkName: "replayer" */ "@/views/Replayer.vue")
   },
   {
     path: "/replay",
     name: "Replay",
-    component: () => import(/* webpackChunkName: "replay" */ "@/views/Replay.vue")
+    component: () =>
+      import(/* webpackChunkName: "replay" */ "@/views/Replay.vue")
   },
   {
     path: "/about",
@@ -37,6 +41,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ "@/views/About.vue")
+  },
+  {
+    path: "/upload",
+    name: "Upload",
+    component: () =>
+      import(/*webpackChunkName: "upload" */ "@/views/Upload.vue")
   }
 ];
 

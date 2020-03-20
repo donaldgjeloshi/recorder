@@ -5,6 +5,7 @@
       <router-link to="/record">Record</router-link>
       <router-link to="/replay">Replay</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/upload">Upload</router-link>
       <SWUpdateInfo />
     </div>
     <router-view />

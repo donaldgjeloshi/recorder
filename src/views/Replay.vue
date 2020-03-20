@@ -1,8 +1,5 @@
 <template>
   <div>
-    <br />
-    <FileReader />
-    <br />
     <div id="replay">
       <div id="scene-1">
         <h4>Scene 1</h4>
@@ -23,11 +20,9 @@
 <script>
 import { mapState } from "vuex";
 import Record from "@/components/Record.vue";
-import FileReader from "@/components/replayer/FileReader.vue";
-
 export default {
   name: "Replay",
-  components: { Record, FileReader },
+  components: { Record },
   computed: mapState(["records"]),
   methods: {
     scene(id) {
