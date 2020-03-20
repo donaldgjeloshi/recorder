@@ -21,9 +21,24 @@
       </div>
     </div>
     <div id="controls">
-      <font-awesome-icon tabindex="0" size="lg" @click.stop="onPlay" icon="play" />
-      <font-awesome-icon tabindex="0" size="lg" @click.stop="onDownload" icon="download" />
-      <font-awesome-icon tabindex="0" size="lg" @click.stop="onTrash" icon="trash-alt" />
+      <font-awesome-icon
+        tabindex="0"
+        size="lg"
+        @click.stop="onPlay"
+        icon="play"
+      />
+      <font-awesome-icon
+        tabindex="0"
+        size="lg"
+        @click.stop="onDownload"
+        icon="download"
+      />
+      <font-awesome-icon
+        tabindex="0"
+        size="lg"
+        @click.stop="onTrash"
+        icon="trash-alt"
+      />
     </div>
   </div>
 </template>
@@ -42,7 +57,7 @@ export default {
       this.$router.push({ name: "Replayer", params: { id: this.record.id } });
     },
     onDownload() {
-      const blob = new Blob([JSON.stringify(this.record)]);
+      const blob = new Blob([JSON.stringify([this.record])]);
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = this.record.id;

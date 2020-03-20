@@ -11,20 +11,15 @@
 export default {
   name: "FileReader",
   data() {
-    return {
-      result: ""
-    };
+    return {};
   },
   methods: {
     loadJSONFromFile(event) {
       const FIRST_FILE = 0;
       const file = event.target.files[FIRST_FILE];
       const reader = new FileReader();
-
       reader.onload = e => {
-        this.result = JSON.parse(e.target.result);
         this.$emit("load", e.target.result);
-        console.log(this.result);
       };
       reader.readAsText(file);
     }

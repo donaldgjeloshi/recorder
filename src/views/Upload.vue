@@ -3,17 +3,11 @@
     <br />
     <FileReader @load="jsonData" />
     <br />
-    <InfoUpload :file="file" />
-    <!--<MouseCanvasUpload />
-    <KeyboardCanvasUpload /> -->
   </div>
 </template>
 
 <script>
 import FileReader from "@/components/uploader/FileReader.vue";
-import InfoUpload from "@/components/uploader/InfoUpload.vue";
-/*import MouseCanvasUpload from "@/components/uploader/MouseCanvasUpload.vue";
-import KeyboardCanvasUpload from "@/components/uploader/KeyboardCanvasUpload.vue"; */
 
 export default {
   name: "Upload",
@@ -21,14 +15,12 @@ export default {
     return { file: "" };
   },
   components: {
-    FileReader,
-    InfoUpload
-    /*MouseCanvasUpload,
-    KeyboardCanvasUpload */
+    FileReader
   },
   methods: {
     jsonData(loadedFile) {
       this.file = loadedFile;
+      localStorage.setItem("recorder-records", this.file);
     }
   }
 };
