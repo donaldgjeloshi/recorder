@@ -11,16 +11,16 @@ import FileReader from "@/components/uploader/FileReader.vue";
 
 export default {
   name: "Upload",
-  data() {
-    return { file: "" };
-  },
   components: {
     FileReader
   },
   methods: {
     jsonData(loadedFile) {
-      this.file = loadedFile;
-      localStorage.setItem("recorder-records", this.file);
+      const records = localStorage.getItem("recorder-records");
+      if (records) {
+        this.$store.commit("load", records);
+      }
+      localStorage.setItem("recorder-records", loadedFile);
     }
   }
 };

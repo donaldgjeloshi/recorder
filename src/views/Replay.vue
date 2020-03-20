@@ -28,6 +28,12 @@ export default {
     scene(id) {
       return this.records.filter(e => e.scene === id);
     }
+  },
+  created() {
+    const records = localStorage.getItem("recorder-records");
+    if (records) {
+      this.$store.commit("load", records);
+    }
   }
 };
 </script>

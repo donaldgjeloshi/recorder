@@ -1,7 +1,7 @@
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
-  publicPath: "/recorder/",
+  publicPath: "/recorder-public/",
   css: {
     loaderOptions: {
       stylus: {
@@ -35,7 +35,7 @@ module.exports = {
             version: "1.0",
             display: "standalone",
             orientation: "any",
-            start_url: "/recorder/",
+            start_url: "/recorder-public/",
             icons: {
               android: true,
               appleIcon: true,
