@@ -1,6 +1,79 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <div>
+      <!-- <link rel="stylesheet" href="https://stackedit.io/style.css" /> -->
+
+      <h1 id="welcome-to-assistive-input-recorder">
+        Welcome to Assistive Input Recorder
+      </h1>
+      <p>
+        Hi! I am glad that <strong>you</strong> are here. I hope you will have
+        some <strong>fun</strong> while testing the input devices provided by
+        the <a href="https://www.technikum-wien.at/">FH Technikum Wien</a>.
+      </p>
+      <h1 id="using-the-app">Using the app</h1>
+      <p>
+        This app was made to help you, even if it means just for a little bit.
+        So let’s take a tour to this site.
+      </p>
+      <h2 id="record">Record</h2>
+      <p>
+        <a href="https://donaldgjeloshi.github.io/recorder-public/#/record"
+          >Record Page</a
+        >
+        shows some different <strong>scenes</strong> that you could test
+        yourself.
+      </p>
+      <blockquote>
+        <p style="color: gray">
+          For example the first scene is there to help you get more active with
+          <a href="www.google.com"><strong>GOOGLE Search</strong></a
+          >.
+        </p>
+      </blockquote>
+      <p>
+        The idea of this scenes is that while you have a real scenario usage,
+        the care givers in background could check the progress of the patient by
+        replaying the recording.<br />
+        Let’s go to the next page!
+      </p>
+      <h2 id="replay1">Replay</h2>
+      <p>
+        <a href="https://donaldgjeloshi.github.io/recorder-public/#/replay"
+          >Replay Page</a
+        >
+        structures the recordings taken by you into three
+        <strong>scenes</strong>. Here are the options to: <em>play</em>,
+        <em>download</em> or <em>delete</em> scene.<br />
+        Let’s explain the colors that one sees as he/she hits the
+        <strong>play button</strong> and <strong>“Start”</strong>. In the
+        drawings you will see different colors which represents the mouse speed:
+      </p>
+
+      <table style="width:50%">
+        <tr>
+          <th>red</th>
+          <th>orange</th>
+          <th>yellow</th>
+          <th>green</th>
+        </tr>
+        <tr>
+          <td>very fast</td>
+          <td>fast</td>
+          <td>medium</td>
+          <td>slow</td>
+        </tr>
+      </table>
+
+      <h2 id="upload">Upload</h2>
+      <p>
+        <a href="https://donaldgjeloshi.github.io/recorder-public/#/upload"
+          >Upload Page</a
+        >
+        it would be most of the time for the care givers but if you, as a user
+        would like to test this feature, you are more than welcome to do so.
+      </p>
+    </div>
   </div>
 </template>
 
@@ -10,4 +83,8 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+table, th, td
+  border: 0.5px solid black
+  border-collapse: collapse
+</style>
