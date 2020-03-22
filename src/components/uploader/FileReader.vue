@@ -22,6 +22,9 @@ export default {
         this.$emit("load", e.target.result);
       };
       reader.readAsText(file);
+      reader.onloadend = function() {
+        alert("Upload done");
+      };
     }
   }
 };
