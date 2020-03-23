@@ -1,6 +1,28 @@
 <template>
   <div id="mouse-canvas">
     <svg viewBox="0 0 400 200">
+      <!-- google shadow box -->
+      <defs>
+        <filter id="shadow">
+          <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="gray" />
+        </filter>
+      </defs>
+      <!-- Szene "Google Search" -->
+      <image
+        href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        height="140"
+        width="140"
+        x="130"
+        y="25"
+      />
+      <rect
+        x="75"
+        y="130"
+        width="250"
+        height="23"
+        rx="13"
+        style="fill:white; filter:url(#shadow);"
+      />
       <g v-for="(entry, idx) of filteredTrack" :key="idx">
         <circle
           :cx="400 * entry.mouse.relX"
