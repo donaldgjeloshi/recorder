@@ -6,11 +6,7 @@
           {{ letter.keyboard.key }}
         </kbd>
       </div>
-      <!-- <div id="current">
-        <kbd v-if="lettersBefore(1)">
-          {{ lettersBefore(1).keyboard.key }}
-        </kbd>
-      </div> -->
+
       <div id="previous">
         <template v-for="({ text }, index) of letters">
           <kbd v-if="text" :key="index">
@@ -29,34 +25,34 @@ export default {
   props: {
     time: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
   },
   methods: {
     lettersBefore(idx) {
-      const l = this.filteredTrack.filter(entry => {
+      const l = this.filteredTrack.filter((entry) => {
         return entry.keyboard.key !== "";
       });
       return l.length >= idx ? l[l.length - idx] : false;
-    }
+    },
   },
   computed: {
     ...mapState(["records"]),
 
     track() {
-      const record = this.records.find(recording => {
+      const record = this.records.find((recording) => {
         return recording.id === this.$route.params.id;
       });
-      return record.track.filter(entry => {
+      return record.track.filter((entry) => {
         return !entry.mouse;
       });
     },
     filteredTrack() {
       const first = this.track[0];
-      const f = this.track.filter(entry => {
+      const f = this.track.filter((entry) => {
         return entry.timestamp < first.timestamp + this.time;
       });
       return f;
@@ -71,10 +67,13 @@ export default {
       return [
         { text: this.lettersBefore(1) },
         { text: this.lettersBefore(2) },
-        { text: this.lettersBefore(3) }
+        { text: this.lettersBefore(3) },
+        { text: this.lettersBefore(4) },
+        { text: this.lettersBefore(5) },
+        { text: this.lettersBefore(6) },
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 

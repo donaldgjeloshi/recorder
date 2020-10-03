@@ -4,25 +4,9 @@
       <!-- google shadow box -->
       <defs>
         <filter id="shadow">
-          <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="gray" />
+          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="gray" />
         </filter>
       </defs>
-      <!-- Szene "Google Search" -->
-      <image
-        href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-        height="140"
-        width="140"
-        x="130"
-        y="25"
-      />
-      <rect
-        x="75"
-        y="130"
-        width="250"
-        height="23"
-        rx="13"
-        style="fill:white; filter:url(#shadow);"
-      />
       <g v-for="(entry, idx) of filteredTrack" :key="idx">
         <circle
           :cx="400 * entry.mouse.relX"
@@ -45,6 +29,27 @@
           "
         />
       </g>
+      <!-- Szene "Google Search" -->
+      <image
+        href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        height="140"
+        width="140"
+        x="130"
+        y="25"
+      />
+      <rect
+        id="search"
+        x="72"
+        y="130"
+        width="250"
+        height="24"
+        rx="3"
+        style="fill:white; filter:url(#shadow);"
+      />
+      <rect x="0" y="0" width="60" height="15" style="fill:white" />
+      <text v-if="seconds != 0" id="timestamp" x="15" y="14">
+        {{ seconds }}:{{ milliseconds }}
+      </text>
     </svg>
   </div>
 </template>
@@ -53,48 +58,70 @@
 import { mapState } from "vuex";
 export default {
   name: "MouseCanvas",
+  data() {
+    return {
+      timeSpan: 0,
+      milliseconds: 0,
+      seconds: 0,
+    };
+  },
   props: {
     time: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     colorStroke(x1, y1, x2, y2) {
       const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      let color = "red";
+      let color = "white";
       if (length < 2) {
         color = "green";
       } else if (length < 6) {
         color = "yellow";
       } else if (length < 12) {
         color = "orange";
+      } else if (length < 130) {
+        color = "red";
       }
       return color;
-    }
+    },
   },
 
   computed: {
     ...mapState(["records"]),
     track() {
-      const record = this.records.find(recording => {
+      const record = this.records.find((recording) => {
+        this.timeSpan = recording.savedOn - recording.startedOn;
+        this.milliseconds = pad3(this.timeSpan % 1000);
+        this.seconds = pad2(this.timeSpan / 1000);
         return recording.id == this.$route.params.id;
       });
-      return record.track.filter(entry => {
+      return record.track.filter((entry) => {
         return !entry.keyboard;
       });
     },
     filteredTrack() {
       const first = this.track[0];
-      return this.track.filter(entry => {
+      return this.track.filter((entry) => {
         return entry.timestamp <= first.timestamp + this.time;
       });
-    }
-  }
+    },
+  },
 };
+function pad2(num) {
+  num = Math.floor(num);
+  return num < 10 ? `0${num}` : `${num}`;
+}
+function pad3(num) {
+  num = Math.floor(num);
+  return num < 10 ? `00${num}` : num < 100 ? `0${num}` : `${num}`;
+}
 </script>
 
 <style lang="stylus" scoped>
 line
-  stroke-width 0.5
+  stroke-width 0.7
+text
+  font-size 0.5rem
 </style>
