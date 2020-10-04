@@ -55,7 +55,7 @@
         <strong>scenes</strong>. Here are the options: <em>to play</em>,
         <em>download</em> or <em>delete</em> the scene.<br />
         Let’s explain the colors that one sees by hitting the
-        <strong>"Play" button</strong> and <strong>"Start"</strong> the
+        <strong>"Play" </strong>button and <strong>"Start"</strong> the
         replaying. In the drawings you will see different colors which represent
         the mouse speed:
       </p>
@@ -75,6 +75,12 @@
         </tr>
       </table>
 
+      <p>
+        In the replaying scene the time that took the user to perform the task
+        and the number of characters typed, can be seen. And the speed could be
+        measured in character per second (CPS). In this way this metric will be
+        used to measure the users' performance.
+      </p>
       <h2 id="upload">Upload</h2>
       <hr />
 
@@ -91,7 +97,7 @@
 
 <script>
 export default {
-  name: "About"
+  name: "About",
 };
 </script>
 

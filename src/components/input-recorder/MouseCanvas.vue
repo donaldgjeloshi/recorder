@@ -134,7 +134,6 @@ text#timestamp
 input#search
   width 99%
   padding 4px 3px
-  
   box-sizing border-box
   border-radius 5px
 </style>

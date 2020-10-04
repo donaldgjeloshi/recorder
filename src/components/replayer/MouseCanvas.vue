@@ -4,9 +4,10 @@
       <!-- google shadow box -->
       <defs>
         <filter id="shadow">
-          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="gray" />
+          <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="gray" />
         </filter>
       </defs>
+
       <g v-for="(entry, idx) of filteredTrack" :key="idx">
         <circle
           :cx="400 * entry.mouse.relX"
@@ -46,8 +47,29 @@
         rx="3"
         style="fill:white; filter:url(#shadow);"
       />
+
       <rect x="0" y="0" width="60" height="15" style="fill:white" />
-      <text v-if="seconds != 0" id="timestamp" x="15" y="14">
+      <rect
+        x="3"
+        y="3"
+        width="60"
+        height="30"
+        rx="2"
+        style="fill:white; filter:url(#shadow);"
+      />
+
+      <foreignObject x="6" y="6" width="20" height="20">
+        <div>
+          <font-awesome-icon icon="info" />
+        </div>
+      </foreignObject>
+
+      <text
+        v-if="seconds != 0 || milliseconds > 200"
+        id="timestamp"
+        x="23"
+        y="20"
+      >
         {{ seconds }}:{{ milliseconds }}
       </text>
     </svg>
@@ -87,7 +109,6 @@ export default {
       return color;
     },
   },
-
   computed: {
     ...mapState(["records"]),
     track() {

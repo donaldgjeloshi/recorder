@@ -14,6 +14,9 @@
           </kbd>
         </template>
       </div>
+      <div id="length">
+        <kbd v-if="letter"> nr. of keys: {{ lengthKeys }} </kbd>
+      </div>
     </div>
   </div>
 </template>
@@ -29,13 +32,16 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      lengthKeys: 0,
+    };
   },
   methods: {
     lettersBefore(idx) {
       const l = this.filteredTrack.filter((entry) => {
         return entry.keyboard.key !== "";
       });
+      this.lengthKeys = l.length;
       return l.length >= idx ? l[l.length - idx] : false;
     },
   },
@@ -103,10 +109,16 @@ div#keyboard-canvas
       justify-content center
       background-color none
       width 100%
+
     div#previous
       kbd
         opacity 0.5
       flex-flow row-reverse nowrap
       width 40%
       justify-content space-around
+    div#length
+      justify-content center
+      background-color none
+      width 100%
+      margin-left 30rem
 </style>
