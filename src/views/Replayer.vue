@@ -29,7 +29,7 @@ export default {
       timer: 0,
       oldTimer: 0,
       requestStop: false,
-      animationFrameID: 0
+      animationFrameID: 0,
     };
   },
   computed: {},
@@ -54,8 +54,8 @@ export default {
     onStop() {
       cancelAnimationFrame(this.animationFrameID);
       this.requestStop = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
